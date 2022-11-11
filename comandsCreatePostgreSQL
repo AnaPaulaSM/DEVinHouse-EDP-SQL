@@ -1,0 +1,58 @@
+CREATE TABLE cliente(
+  id SERIAL NOT NULL,
+  nome_completo varchar(100) DEFAULT NULL,
+  primeiro_nome varchar(30) DEFAULT NULL,
+  sobrenome varchar(70) DEFAULT NULL,
+  cpf BIGINT DEFAULT NULL,
+  data_nascimento date DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE conta(
+  id SERIAL NOT NULL,
+  cliente_id int DEFAULT NULL,
+  tipo_id int DEFAULT NULL,
+  categoria_id int DEFAULT NULL,
+  valor bigint DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE conta_categoria (
+  id SERIAL NOT NULL,
+  nome varchar(30) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE conta_servicos (
+  id SERIAL NOT NULL PRIMARY KEY,
+  categoria_id int DEFAULT NULL,
+  nome varchar(60) DEFAULT NULL,
+  quantidade int DEFAULT '1',
+  taxa bigint DEFAULT NULL
+  );
+
+CREATE TABLE conta_tipo (
+  id SERIAL NOT NULL,
+  nome varchar(40) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE movimento (
+  id SERIAL NOT NULL PRIMARY KEY,
+  tipo_id int,
+  conta_id int DEFAULT NULL,
+  valor bigint DEFAULT NULL,
+  status_id int NOT NULL DEFAULT '0',
+  cadastrado_em TIMESTAMP,
+  atualizado_em TIMESTAMP
+);
+
+CREATE TABLE movimento_status (
+  id int NOT NULL  PRIMARY KEY,
+  nome varchar(20) DEFAULT NULL
+);
+
+CREATE TABLE movimento_tipo (
+  id int NOT NULL  PRIMARY KEY,
+  nome varchar(50) DEFAULT NULL
+);
